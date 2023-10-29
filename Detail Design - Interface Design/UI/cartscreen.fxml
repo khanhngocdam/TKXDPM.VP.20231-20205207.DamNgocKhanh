@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="694.0" prefWidth="251.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="50.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefWidth="229.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="87.0" text="Subtotal:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="totalCostLabel" prefHeight="27.0" prefWidth="113.0" text="1.976 đ" textFill="#04c9ff">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="81.0" text="Amount:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="totalCostLabel1" prefHeight="27.0" prefWidth="103.0" text="2.173 đ" textFill="#04c9ff">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" text="VAT(10%)" textAlignment="RIGHT" textFill="RED">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Pane prefHeight="102.0" prefWidth="274.0" />
+            <Button fx:id="btnPlaceOrder" mnemonicParsing="false" onAction="#btnPlaceOrderPressed" prefHeight="43.0" prefWidth="222.0" style="-fx-background-color: red;" text="Place Order" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </right>
+   <top>
+      <HBox prefHeight="72.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="74.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: ;" />
+            <Label text="CART" textFill="#04c9ff">
+               <font>
+                  <Font name="System Bold" size="50.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #dedede;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="103.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="30.0" right="20.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@348868379_817418002944058_5896179216867483107_n.jpg" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="106.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="21.0" text="Book3" textFill="#04c9ff">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="106.0" text="Delete" />
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="103.0" prefWidth="299.0" />
+                  <VBox alignment="CENTER_RIGHT" prefHeight="103.0" prefWidth="96.0">
+                     <children>
+                        <Label text="998 đ" textFill="#04c9ff">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label text="VND" />
+                     </children>
+                  </VBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
