@@ -1,51 +1,42 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-11-04 06:47:14.171
+-- Last modification date: 2023-11-04 17:33:54.173
 
 -- tables
 -- Table: Book
-create database AIMS;
-use AIMS;
 CREATE TABLE Book (
-    id int  NOT NULL,
-    author varchar(100)  NOT NULL,
-    publisher varchar(100)  NOT NULL,
-    publisher_date datetime  NOT NULL,
-    numer_of_page int  NULL,
-    book_category varchar(100)  NULL,
-    cover_type varchar(100)  NOT NULL,
+    id int  NOT NULL COMMENT 'ID, same as ID of Media of
+which type is Book',
+    author varchar(100)  NOT NULL COMMENT 'Author''''name',
+    publisher varchar(100)  NOT NULL COMMENT 'Publishing house',
+    publisher_date datetime  NOT NULL COMMENT 'Date of publishing',
+    numer_of_page int  NULL COMMENT 'Page number',
+    book_category varchar(100)  NULL COMMENT 'Book category',
+    cover_type varchar(100)  NOT NULL COMMENT 'Cover type',
     language varchar(20)  NULL,
     CONSTRAINT Book_pk PRIMARY KEY (id)
 );
 
 -- Table: CD
 CREATE TABLE CD (
-    id int  NOT NULL,
-    artist varchar(50)  NOT NULL,
-    music_type varchar(50)  NOT NULL,
-    record_label varchar(50)  NOT NULL,
-    category_cd varchar(50)  NOT NULL,
+    id int  NOT NULL COMMENT 'ID, same as ID of Media of
+which type is CD',
+    artist varchar(50)  NOT NULL COMMENT 'Artist''''s name',
+    music_type varchar(50)  NOT NULL COMMENT 'Music genres',
+    record_label varchar(50)  NOT NULL COMMENT 'Record label',
+    category_cd varchar(50)  NOT NULL COMMENT 'Category of CD',
     release_date datetime  NULL,
     CONSTRAINT CD_pk PRIMARY KEY (id)
 );
 
--- Table: Card
-CREATE TABLE Card (
-    id int  NOT NULL AUTO_INCREMENT,
-    cvv_code varchar(50)  NOT NULL,
-    date_expired datetime  NOT NULL,
-    owner varchar(50)  NOT NULL,
-    card_code varchar(50)  NOT NULL,
-    CONSTRAINT Card_pk PRIMARY KEY (id)
-);
-
 -- Table: DVD
 CREATE TABLE DVD (
-    id int  NOT NULL,
-    studio varchar(100)  NOT NULL,
-    disc_type varchar(20)  NOT NULL,
-    subtitle varchar(100)  NOT NULL,
+    id int  NOT NULL COMMENT 'ID, same as ID of Media of
+which type is DVD',
+    studio varchar(100)  NOT NULL COMMENT 'Manufacturer',
+    disc_type varchar(20)  NOT NULL COMMENT 'Disc type',
+    subtitle varchar(100)  NOT NULL COMMENT 'Subtitles',
     language varchar(20)  NOT NULL,
-    runtime varchar(20)  NOT NULL,
+    runtime varchar(20)  NOT NULL COMMENT 'Duration',
     director varchar(50)  NOT NULL,
     release_date datetime  NULL,
     dvd_category varchar(20)  NULL,
@@ -54,38 +45,38 @@ CREATE TABLE DVD (
 
 -- Table: DeliveryInfo
 CREATE TABLE DeliveryInfo (
-    id int  NOT NULL,
-    name varchar(50)  NOT NULL,
-    province varchar(20)  NOT NULL,
-    address varchar(100)  NOT NULL,
-    instruction varchar(100)  NOT NULL,
-    time_receive datetime  NULL,
+    id int  NOT NULL COMMENT 'ID, auto increment, same as ID of Order',
+    name varchar(50)  NOT NULL COMMENT 'Receiver name',
+    province varchar(20)  NOT NULL COMMENT 'Provinces',
+    address varchar(100)  NOT NULL COMMENT 'Delivery address',
+    instruction varchar(100)  NOT NULL COMMENT 'Delivery instructions',
+    time_receive datetime  NULL COMMENT 'time receive when select rush delivery',
     CONSTRAINT DeliveryInfo_pk PRIMARY KEY (id)
 );
 
 -- Table: Invoice
 CREATE TABLE Invoice (
-    id int  NOT NULL,
+    id int  NOT NULL COMMENT 'ID, auto increment, same as ID of Order',
     total_amount int  NOT NULL,
     CONSTRAINT Invoice_pk PRIMARY KEY (id)
 );
 
 -- Table: Media
 CREATE TABLE Media (
-    id int  NOT NULL AUTO_INCREMENT,
-    title varchar(200)  NOT NULL,
-    value float  NOT NULL,
-    price float  NOT NULL,
-    category varchar(100)  NOT NULL,
-    image_url varchar(200)  NOT NULL,
-    rush_delivery bool  NOT NULL,
+    id int  NOT NULL AUTO_INCREMENT COMMENT 'ID, auto increment',
+    title varchar(200)  NOT NULL COMMENT 'Product name',
+    value float  NOT NULL COMMENT 'value of product',
+    price float  NOT NULL COMMENT 'price of product',
+    category varchar(100)  NOT NULL COMMENT 'Media type : CD, DVD,...',
+    image_url varchar(200)  NOT NULL COMMENT 'path to image',
+    rush_delivery bool  NOT NULL COMMENT 'rush delivery available ? ',
     CONSTRAINT Media_pk PRIMARY KEY (id)
 );
 
 -- Table: MediaOrder
 CREATE TABLE MediaOrder (
     id int  NOT NULL,
-    quantity int  NOT NULL,
+    quantity int  NOT NULL COMMENT 'Number',
     Media_id int  NOT NULL,
     Order_id int  NOT NULL,
     CONSTRAINT MediaOrder_pk PRIMARY KEY (id)
@@ -93,10 +84,10 @@ CREATE TABLE MediaOrder (
 
 -- Table: Order
 CREATE TABLE `Order` (
-    id int  NOT NULL AUTO_INCREMENT,
+    id int  NOT NULL AUTO_INCREMENT COMMENT 'ID, auto increment, same as ID of DeliveryInfo',
     shipping_fee int  NOT NULL,
     CONSTRAINT Order_pk PRIMARY KEY (id)
-);
+) COMMENT 'Shipping fee';
 
 -- Table: PaymentTransaction
 CREATE TABLE PaymentTransaction (
@@ -115,6 +106,14 @@ CREATE TABLE Track (
     name varchar(100)  NOT NULL,
     CD_id int  NOT NULL,
     CONSTRAINT Track_pk PRIMARY KEY (id)
+);
+
+-- Table: VNPay
+CREATE TABLE VNPay (
+    id int  NOT NULL AUTO_INCREMENT COMMENT 'ID, auto increment',
+    owner varchar(50)  NOT NULL COMMENT 'Cardholders',
+    phone_number_of_vnpay int  NOT NULL COMMENT 'Phone number used for registration',
+    CONSTRAINT VNPay_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
@@ -148,7 +147,7 @@ ALTER TABLE MediaOrder ADD CONSTRAINT MediaOrder_Order FOREIGN KEY MediaOrder_Or
 
 -- Reference: PaymentTransaction_Card (table: PaymentTransaction)
 ALTER TABLE PaymentTransaction ADD CONSTRAINT PaymentTransaction_Card FOREIGN KEY PaymentTransaction_Card (Card_id)
-    REFERENCES Card (id);
+    REFERENCES VNPay (id);
 
 -- Reference: PaymentTransaction_Invoice (table: PaymentTransaction)
 ALTER TABLE PaymentTransaction ADD CONSTRAINT PaymentTransaction_Invoice FOREIGN KEY PaymentTransaction_Invoice (Invoice_id)
