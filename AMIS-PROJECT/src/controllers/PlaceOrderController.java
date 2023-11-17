@@ -1,0 +1,55 @@
+package controllers;
+
+import models.cart.Cart;
+import models.cart.CartMedia;
+import models.media.Media;
+
+public class PlaceOrderController {
+    public void placeOrder() {
+        Cart.getCart().checkAvailabilityOfProduct();
+    }
+
+    public boolean validateAddressPlaceRushOrder(String province, String address) {
+        if (!validateAddress(address))
+            return false;
+        if(!province.equals("Hà Nội"))
+            return false;
+        return true;
+    }
+
+    public boolean validateAddress(String address) {
+        // Check address is not null
+        if (address == null)
+            return false;
+        // Check if contain leter space only
+        if (address.trim().replaceAll(",", "").length() == 0)
+            return false;
+        return true;
+    }
+
+    public boolean validateName(String name) {
+        // Check name is not null
+        if (name == null)
+            return false;
+        // Check if contain leter space only
+        if (name.trim().length() == 0)
+            return false;
+        // Check if contain only leter and space
+        if (name.matches("^[\\p{L} \\s]+$") == false)
+            return false;
+        return true;
+    }
+
+    public boolean validatePhoneNumber(String phoneNumber) {
+        if (phoneNumber == null) {
+            return false;
+        }
+        if(phoneNumber.length() == 0) {
+            return false;
+        }
+        if(phoneNumber.matches("\\d+") == false) {
+            return false;
+        }
+        return true;
+    }
+}
