@@ -4,15 +4,20 @@ public class Media {
     protected int id;
     protected String title;
     protected String category;
-    protected int value;
-    protected int price;
+    protected double value;
+    protected double price;
     protected static int quantity;
     protected String imageURL;
     protected boolean rushDelivery;
 
     //Constructor
-
-    public Media(int id, String title, String category, int value, int price, int quantity, String imageURL, Boolean rushDelivery) {
+    public Media(int id, String title, double price, String imageURL ) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.imageURL = imageURL;
+    }
+    public Media(int id, String title, String category, double value, double price, int quantity, String imageURL, Boolean rushDelivery) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -48,7 +53,7 @@ public class Media {
         this.category = category;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -56,7 +61,7 @@ public class Media {
         this.value = value;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

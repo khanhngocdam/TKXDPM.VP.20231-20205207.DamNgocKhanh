@@ -1,7 +1,7 @@
 package models.cart;
 
 import exception.MediaNotAvailableException;
-import models.media.Media;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +40,26 @@ public class Cart {
             if (requiredQuantity > availQuantity) allAvai = false;
         }
         if (!allAvai) throw new MediaNotAvailableException("Some media not available");
+    }
+
+    public void addCartMedia(CartMedia cartMedia) {
+        lstCartMedia.add(cartMedia);
+    }
+
+    public void removeCartMedia(CartMedia cartMedia) {
+        lstCartMedia.remove(cartMedia);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("My cart:\n");
+        double totalPrice = 0;
+        for (CartMedia cartMedia : lstCartMedia) {
+            result.append(cartMedia.getMedia().getId()).append(". ").append(cartMedia.getMedia().getTitle()).append("\n");
+            totalPrice += cartMedia.getPrice();
+        }
+
+        return result.append(totalPrice).append("\n").toString();
     }
 
 }

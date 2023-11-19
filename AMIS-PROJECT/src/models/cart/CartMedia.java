@@ -5,13 +5,13 @@ import models.media.Media;
 public class CartMedia {
     private Media media;
     private int quantity;
-    private int price;
+    private double price;
 
     public CartMedia(){
 
     }
 
-    public CartMedia(Media media, Cart cart, int quantity) {
+    public CartMedia(Media media, int quantity) {
         this.media = media;
         this.quantity = quantity;
         this.price = media.getPrice() * quantity;
@@ -33,7 +33,7 @@ public class CartMedia {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
