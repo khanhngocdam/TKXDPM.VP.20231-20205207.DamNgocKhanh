@@ -8,6 +8,7 @@ import javafx.scene.control.SplitMenuButton;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import models.cart.Cart;
 import models.media.Book;
 import models.media.Media;
 
@@ -18,6 +19,8 @@ import java.util.List;
 public class HomeController {
 
     @FXML
+    private Label numMediaInCart;
+    @FXML
     private VBox vboxMedia1;
 
     @FXML
@@ -25,6 +28,8 @@ public class HomeController {
 
     @FXML
     private VBox vboxMedia3;
+    @FXML
+    private VBox vboxMedia4;
     @FXML
     private HBox hboxMedia;
 
@@ -50,23 +55,29 @@ public class HomeController {
         vboxColumns.add(vboxMedia1);
         vboxColumns.add(vboxMedia2);
         vboxColumns.add(vboxMedia3);
+        vboxColumns.add(vboxMedia4); // Thêm vào danh sách
 
 
         // Vòng lặp để thêm media_home.fxml vào các cột theo từng hàng
         int i = 0;
         while (i < lstMedia.size()) {
-           VBox vboxColumn = vboxColumns.get(i%3);
+           VBox vboxColumn = vboxColumns.get(i%4);
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/media_home.fxml"));
                     loader.load();
                     MediaHomeController mediaHomeController = loader.getController();
                     mediaHomeController.setData(lstMedia.get(i));
+                    mediaHomeController.setHomeController(this);
                     vboxColumn.getChildren().add(loader.getRoot());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             i++;
         }
+    }
+
+    public void updateNumMediaInCart() {
+        this.numMediaInCart.setText(Cart.getCart().getLstCartMedia().size() + "");
     }
 }
 

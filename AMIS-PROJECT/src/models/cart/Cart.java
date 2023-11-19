@@ -3,6 +3,7 @@ package models.cart;
 import exception.MediaNotAvailableException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Cart {
@@ -43,6 +44,16 @@ public class Cart {
     }
 
     public void addCartMedia(CartMedia cartMedia) {
+        Iterator<CartMedia> iterator = lstCartMedia.iterator();
+        while (iterator.hasNext()) {
+            CartMedia existingMedia = iterator.next();
+            if (existingMedia.getMedia().equals(cartMedia.getMedia())) {
+                // Nếu phần tử đã tồn tại, thực hiện cập nhật
+                existingMedia.setQuantity(existingMedia.getQuantity() + cartMedia.getQuantity());
+                return;
+            }
+        }
+        // Nếu không tìm thấy, thêm mới
         lstCartMedia.add(cartMedia);
     }
 
