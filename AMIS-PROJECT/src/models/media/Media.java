@@ -6,15 +6,16 @@ public class Media {
     protected String category;
     protected double value;
     protected double price;
-    protected static int quantity;
+    protected int quantity;
     protected String imageURL;
     protected boolean rushDelivery;
 
     //Constructor
-    public Media(int id, String title, double price, String imageURL ) {
+    public Media(int id, String title, double price, int quantity, String imageURL ) {
         this.id = id;
         this.title = title;
         this.price = price;
+        this.quantity = quantity;
         this.imageURL = imageURL;
     }
     public Media(int id, String title, String category, double value, double price, int quantity, String imageURL, Boolean rushDelivery) {

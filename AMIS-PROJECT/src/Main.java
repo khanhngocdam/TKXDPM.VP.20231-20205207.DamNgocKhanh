@@ -23,16 +23,6 @@ public class Main extends Application {
         primaryStage.show();
     }
     public static void main(String[] args) {
-//        Cart myCart = Cart.getCart();
-//        Media media1 = new Media(1, "MEDIA1", 3.4);
-//        Media media2 = new Media(2, "MEDIA2", 4.3);
-//        CartMedia cartMedia1 = new CartMedia(media1, 2);
-//        CartMedia cartMedia2 = new CartMedia(media2, 3);
-//        myCart.addCartMedia(cartMedia1);
-//        myCart.addCartMedia(cartMedia2);
-//        System.out.println(myCart.toString());
-//        myCart.removeCartMedia(cartMedia1);
-//        System.out.println(myCart.toString());
             launch(args);
     }
 }

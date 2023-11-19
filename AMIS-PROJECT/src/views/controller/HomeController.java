@@ -1,13 +1,18 @@
 package views.controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import models.cart.Cart;
 import models.media.Book;
 import models.media.Media;
@@ -15,6 +20,7 @@ import models.media.Media;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class HomeController {
 
@@ -40,10 +46,14 @@ public class HomeController {
 
 
     public void setListMedia() {
+        // Khởi tạo một đối tượng Random
+        Random random = new Random();
+
         lstMedia = new ArrayList<>();
         //
         for(int i = 1; i <= 12; i++) {
-            Media media = new Media(i, "Book " + i, 2.5, "/assets/images/book/book" + i + ".jpg" );
+            int avaiNumMedia = random.nextInt(21) + 30;
+            Media media = new Media(i, "Book " + i, 2.5, avaiNumMedia, "/assets/images/book/book" + i + ".jpg" );
             lstMedia.add(media);
         }
     }
@@ -74,10 +84,29 @@ public class HomeController {
                 }
             i++;
         }
+        numMediaInCart.setText(Cart.getCart().getLstCartMedia().size() + " media");
     }
 
     public void updateNumMediaInCart() {
-        this.numMediaInCart.setText(Cart.getCart().getLstCartMedia().size() + "");
+        this.numMediaInCart.setText(Cart.getCart().getLstCartMedia().size() + " media");
+    }
+
+    @FXML
+    public void viewCartHandle(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
+            Parent cartRoot = loader.load();
+
+            // Access the CartController to perform any initialization or pass data
+            CartController cartController = loader.getController();
+            Stage cartStage = new Stage();
+            cartStage.setTitle("Shopping Cart");
+            cartStage.setScene(new Scene(cartRoot));
+            cartStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -25,6 +25,8 @@ public class MediaHomeController {
     @FXML
     private Label mediaPrice;
     @FXML
+    private Label mediaAvail;
+    @FXML
     protected Spinner<Integer> spinnerChangeNumber;
 
     @FXML
@@ -39,6 +41,7 @@ public class MediaHomeController {
         mediaImage.setImage(new Image(media.getImageURL()));
         mediaTitle.setText(media.getTitle());
         mediaPrice.setText(String.valueOf(media.getPrice()));
+        mediaAvail.setText(media.getQuantity() + "");
         spinnerChangeNumber.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
         );
@@ -64,7 +67,8 @@ public class MediaHomeController {
     @FXML
     public void handleAddToCart(ActionEvent event) {
         Cart.getCart().addCartMedia(new CartMedia(media, spinnerChangeNumber.getValue()));
-
+        media.setQuantity(media.getQuantity() - spinnerChangeNumber.getValue());
+        mediaAvail.setText(media.getQuantity()+"");
         // Gọi phương thức updateNumMediaInCart() từ HomeController
         if (homeController != null) {
             homeController.updateNumMediaInCart();
