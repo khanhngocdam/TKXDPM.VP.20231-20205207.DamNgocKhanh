@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 
 public class HomeController {
+    @FXML
+    private AnchorPane mainAnchorPane;
 
     @FXML
     private Label numMediaInCart;
@@ -53,8 +56,12 @@ public class HomeController {
         //
         for(int i = 1; i <= 12; i++) {
             int avaiNumMedia = random.nextInt(21) + 30;
-            Media media = new Media(i, "Book " + i, 2.5, avaiNumMedia, "/assets/images/book/book" + i + ".jpg" );
-            lstMedia.add(media);
+            Media book = new Media(i, "Book " + i, 3.5, avaiNumMedia, "/assets/images/book/book" + i + ".jpg" );
+            Media dvd = new Media(i, "DVD " + i, 4.67, avaiNumMedia, "/assets/images/dvd/dvd" + i + ".jpg" );
+            Media cd = new Media(i, "CD " + i, 4.67, avaiNumMedia, "/assets/images/cd/cd" + i + ".jpg" );
+            lstMedia.add(book);
+            lstMedia.add(dvd);
+            lstMedia.add(cd);
         }
     }
     public void initialize() {
@@ -95,16 +102,11 @@ public class HomeController {
     public void viewCartHandle(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
-            Parent cartRoot = loader.load();
+            AnchorPane homePane = loader.load();
 
-            // Access the CartController to perform any initialization or pass data
-            CartController cartController = loader.getController();
-            Stage cartStage = new Stage();
-            cartStage.setTitle("Shopping Cart");
-            cartStage.setScene(new Scene(cartRoot));
-            cartStage.show();
-
-        } catch (IOException e) {
+            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình Home
+            mainAnchorPane.getChildren().setAll(homePane);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

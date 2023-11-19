@@ -1,10 +1,13 @@
 package views.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import models.cart.Cart;
 import models.cart.CartMedia;
@@ -18,6 +21,8 @@ import javafx.scene.control.Label;
 
 public class CartController {
     @FXML
+    private AnchorPane mainAnchorPane;
+    @FXML
     private Label labelSubtotal;
     @FXML
     private Label labelVAT;
@@ -26,6 +31,8 @@ public class CartController {
 
     @FXML
     private VBox vboxCart;
+
+    private HomeController homeController;
 
     public void requestToPlaceOrder(MouseEvent mouseEvent) {
     }
@@ -52,6 +59,26 @@ public class CartController {
         labelAmount.setText(subTotal * 1.1 + "");
     }
 
-
-
+    @FXML
+    void backToHome(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
+            AnchorPane homePane = loader.load();
+            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình Home
+            mainAnchorPane.getChildren().setAll(homePane);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void requestToPlaceOrder(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/delivery_info.fxml"));
+            AnchorPane homePane = loader.load();
+            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình Home
+            mainAnchorPane.getChildren().setAll(homePane);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
