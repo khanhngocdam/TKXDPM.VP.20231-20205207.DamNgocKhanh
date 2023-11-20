@@ -18,7 +18,6 @@ public class Main extends Application {
         // Set the scene
         Scene scene = new Scene(root, 1326, 788); // Set width and height as per your requirement
         primaryStage.setScene(scene);
-
         // Show the stage
         primaryStage.show();
     }
