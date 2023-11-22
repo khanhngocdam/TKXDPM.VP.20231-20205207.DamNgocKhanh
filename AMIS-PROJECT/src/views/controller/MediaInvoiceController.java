@@ -19,10 +19,14 @@ public class MediaInvoiceController{
     @FXML
     private Label numOfProd;
     private CartMedia cardMedia;
-     private CartController cartController;
+     private InvoiceController invoiceController;
 
     public void setCardMedia(CartMedia cardMedia) {
         this.cardMedia = cardMedia;
+    }
+
+    public void setInvoiceController(InvoiceController invoiceController) {
+        this.invoiceController = invoiceController;
     }
 
     public void setData(CartMedia cartMedia) {
@@ -34,5 +38,6 @@ public class MediaInvoiceController{
         price.setText(String.valueOf(cartMedia.getPrice()));
         numOfProd.setText(cartMedia.getQuantity() + "");
     }
+
 
 }

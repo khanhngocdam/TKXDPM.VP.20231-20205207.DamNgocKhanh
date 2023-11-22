@@ -102,10 +102,10 @@ public class HomeController {
     public void viewCartHandle(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
-            AnchorPane homePane = loader.load();
+            AnchorPane cartPane = loader.load();
 
-            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình Home
-            mainAnchorPane.getChildren().setAll(homePane);
+            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình cart
+            mainAnchorPane.getChildren().setAll(cartPane);
         } catch (Exception e) {
             e.printStackTrace();
         }

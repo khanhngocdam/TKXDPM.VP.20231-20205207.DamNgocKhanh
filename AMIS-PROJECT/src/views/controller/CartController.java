@@ -1,5 +1,6 @@
 package views.controller;
 
+import controllers.PlaceOrderController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,7 @@ public class CartController {
     private VBox vboxCart;
 
     private HomeController homeController;
+    private PlaceOrderController placeOrderController;
 
     public void requestToPlaceOrder(MouseEvent mouseEvent) {
     }
@@ -40,9 +42,7 @@ public class CartController {
         vboxCart.getChildren().clear();
         List<CartMedia> lstCartMedia = Cart.getCart().getLstCartMedia();
         int i = 1;
-        double subTotal = 0.0;
         for (CartMedia cartMedia: lstCartMedia) {
-            subTotal += cartMedia.getPrice();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/media_cart.fxml"));
                 loader.load();
@@ -54,6 +54,7 @@ public class CartController {
                 e.printStackTrace();
             }
         }
+        double subTotal = Cart.getCart().getSubTotal();
         labelSubtotal.setText(subTotal+"");
         labelVAT.setText(subTotal*0.1 + "");
         labelAmount.setText(subTotal * 1.1 + "");
@@ -72,6 +73,8 @@ public class CartController {
     }
     @FXML
     void requestToPlaceOrder(ActionEvent event) {
+        placeOrderController = new PlaceOrderController();
+        placeOrderController.placeOrder();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/delivery_info.fxml"));
             AnchorPane homePane = loader.load();

@@ -5,6 +5,7 @@ import java.util.Date;
 public class DeliveryInfo {
     String name;
     String province;
+    String phone;
     String address;
     String instruction;
     Date timeReceive;
@@ -15,6 +16,13 @@ public class DeliveryInfo {
         this.address = address;
         this.instruction = instruction;
         this.timeReceive = timeReceive;
+    }
+    public DeliveryInfo(String name, String phone, String province, String address, String instruction) {
+        this.name = name;
+        this.phone = phone;
+        this.province = province;
+        this.address = address;
+        this.instruction = instruction;
     }
 
     public String getName() {
@@ -55,5 +63,13 @@ public class DeliveryInfo {
 
     public void setTimeReceive(Date timeReceive) {
         this.timeReceive = timeReceive;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

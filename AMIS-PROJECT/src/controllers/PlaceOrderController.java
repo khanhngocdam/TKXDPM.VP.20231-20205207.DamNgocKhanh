@@ -1,8 +1,12 @@
 package controllers;
 
+import models.DeliveryInfo;
+import models.Order;
 import models.cart.Cart;
 import models.cart.CartMedia;
 import models.media.Media;
+
+import java.sql.SQLException;
 
 public class PlaceOrderController {
     public void placeOrder() {
@@ -51,6 +55,11 @@ public class PlaceOrderController {
             return false;
         }
         return true;
+    }
+
+    public Order createOrder(DeliveryInfo deliveryInfo) throws SQLException {
+        Order order = new Order(deliveryInfo);
+        return order;
     }
 
 
