@@ -1,11 +1,14 @@
 package views.controller;
 
+import javafx.concurrent.Worker;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -14,19 +17,32 @@ public class VNPayController {
     private final Stage stage;
     public VNPayController(Stage stage) {
         this.stage = stage;
-
+        Label location = new Label();
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
         webEngine.load(buildUrl(10000000+""));
+        webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+            if(Worker.State.SUCCEEDED.equals(newValue)) {
+                location.setText(webEngine.getLocation());
+            }
+        });
+        location.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.contains("vnp_ResponseCode=00")) {
+                try {
+                    ResultController resultController = new ResultController(stage);
+                    resultController.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         VBox web = new VBox();
         web.getChildren().add(browser);
 
         Scene scene = new Scene(web);
         stage.setScene(scene);
-
         this.stage.show();
     }
-
     public static String buildUrl(String amount) {
         String url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?";
         String vnp_Amount = "vnp_Amount=" + amount + "00&";
@@ -48,7 +64,7 @@ public class VNPayController {
         System.out.println(vnp_TxnRef);
         String vnp_Version = "vnp_Version=2.1.0";
 
-        String hashData = vnp_Amount + vnp_BankCode + vnp_Command + vnp_CreateDate + vnp_CurrCode + vnp_IpAddr + vnp_Locale + vnp_OrderInfo + vnp_OrderType + vnp_ReturnUrl + vnp_TmnCode + vnp_TxnRef + vnp_Version;
+        String hashData = vnp_Amount + vnp_BankCode + vnp_Command  + vnp_CreateDate + vnp_CurrCode + vnp_IpAddr + vnp_Locale + vnp_OrderInfo + vnp_OrderType + vnp_ReturnUrl + vnp_TmnCode + vnp_TxnRef + vnp_Version;
         url += hashData;
 
         String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData);
