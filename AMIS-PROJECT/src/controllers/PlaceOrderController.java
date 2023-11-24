@@ -58,8 +58,12 @@ public class PlaceOrderController {
     }
 
     public Order createOrder(DeliveryInfo deliveryInfo) throws SQLException {
-        Order order = new Order(deliveryInfo);
+        Order order = new Order(deliveryInfo, Cart.getCart().getLstCartMedia());
+
         return order;
+    }
+    public double calculateShippingFee(Order order) {
+        return order.subTotal() * 0.1;
     }
 
 

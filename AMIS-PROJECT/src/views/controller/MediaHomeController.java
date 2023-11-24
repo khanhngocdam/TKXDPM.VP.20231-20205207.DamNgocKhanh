@@ -3,10 +3,7 @@ package views.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import models.cart.Cart;
@@ -31,6 +28,8 @@ public class MediaHomeController {
 
     @FXML
     protected Button addToCartBtn;
+    @FXML
+    private Label soldOut;
 
     private Media media;
 
@@ -43,7 +42,7 @@ public class MediaHomeController {
         mediaPrice.setText(String.valueOf(media.getPrice()));
         mediaAvail.setText(media.getQuantity() + "");
         spinnerChangeNumber.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, media.getQuantity(), 1)
         );
     }
 
@@ -66,9 +65,21 @@ public class MediaHomeController {
 
     @FXML
     public void handleAddToCart(ActionEvent event) {
+        int updateQuantity = media.getQuantity()  - spinnerChangeNumber.getValue();
         Cart.getCart().addCartMedia(new CartMedia(media, spinnerChangeNumber.getValue()));
-        media.setQuantity(media.getQuantity() - spinnerChangeNumber.getValue());
-        mediaAvail.setText(media.getQuantity()+"");
+        media.setQuantity(updateQuantity);
+        if(updateQuantity>0) {
+            spinnerChangeNumber.setValueFactory(
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1,updateQuantity, 1)
+            );
+        } else {
+            spinnerChangeNumber.setVisible(false);
+            addToCartBtn.setVisible(false);
+            soldOut.setVisible(true);
+        }
+        mediaAvail.setText(updateQuantity+"");
+
+
         // Gọi phương thức updateNumMediaInCart() từ HomeController
         if (homeController != null) {
             homeController.updateNumMediaInCart();

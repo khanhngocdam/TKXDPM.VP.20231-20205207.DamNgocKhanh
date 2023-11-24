@@ -60,6 +60,9 @@ public class Cart {
     public void removeCartMedia(CartMedia cartMedia) {
         lstCartMedia.remove(cartMedia);
     }
+    public void emptyCart() {
+        Cart.getCart().getLstCartMedia().clear();
+    }
 
     @Override
     public String toString() {

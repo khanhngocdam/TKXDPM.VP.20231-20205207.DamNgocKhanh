@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.DeliveryInfo;
 import models.Order;
+import models.cart.Cart;
 
 import java.io.IOException;
 
@@ -74,7 +75,7 @@ public class DeliveryInfoController {
             throw new InvalidDeliveryInfoException("Phone number input invalid, please input phone number again !");
         }
         DeliveryInfo deliveryInfo = new DeliveryInfo(name.getText(), phone.getText(), province.getValue(), address.getText(), instructions.getText());
-        Order order = new Order(deliveryInfo);
+        Order order = new Order(deliveryInfo, Cart.getCart().getLstCartMedia());
         InvoiceController invoiceController = new InvoiceController((Stage)btnConfirmDelivery.getScene().getWindow(), order);
         invoiceController.show();
     }

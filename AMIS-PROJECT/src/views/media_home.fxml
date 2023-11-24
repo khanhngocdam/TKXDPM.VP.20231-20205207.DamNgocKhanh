@@ -12,6 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import views.controller.HomeController?>
+<?import javafx.scene.layout.StackPane?>
 <AnchorPane prefHeight="211.0" prefWidth="298.0" style="-fx-border-color: #ccd9ff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.controller.MediaHomeController" >
    <children>
       <ImageView fx:id="mediaImage" fitHeight="152.0" fitWidth="160.0" layoutX="14.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
@@ -63,7 +64,7 @@
                         </Pane>
                         <Pane prefHeight="37.0" prefWidth="60.0">
                            <children>
-                              <Label fx:id="mediaAvail" layoutX="10.0" layoutY="6.0" prefHeight="16.0" prefWidth="42.0" text="9" />
+                              <Label fx:id="mediaAvail" layoutX="10.0" layoutY="6.0" prefHeight="16.0" prefWidth="42.0" text="9"/>
                            </children>
                         </Pane>
                      </children>
@@ -75,7 +76,15 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="72.0" prefWidth="106.0">
                      <children>
-                        <Button fx:id="addToCartBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" style="-fx-cursor: hand;" text="Add to Cart" onAction="#handleAddToCart" />
+
+                        <StackPane>
+                           <Button fx:id="addToCartBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" style="-fx-cursor: hand;" text="Add to Cart" onAction="#handleAddToCart" />
+                           <Label fx:id="soldOut" text="Sold out" textFill="#FF0000" visible="false"  prefHeight="35.0" prefWidth="97.0">
+                              <font>
+                                 <Font name="System Bold " size="14.0" />
+                              </font>
+                           </Label>
+                        </StackPane>
                      </children>
                   </HBox>
                </children>

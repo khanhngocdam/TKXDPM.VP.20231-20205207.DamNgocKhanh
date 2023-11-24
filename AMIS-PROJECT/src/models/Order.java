@@ -1,36 +1,54 @@
 package models;
 
 import models.cart.Cart;
+import models.cart.CartMedia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    public Cart cart = Cart.getCart();
+    private List<CartMedia> listOrderMedia;
      public DeliveryInfo deliveryInfo;
     double shippingFee;
 
-    public Order() {
-    }
 
     public double getShippingFee() {
-        return  Cart.getCart().getLstCartMedia().size() * 2;
+        return  this.shippingFee;
     }
-    public Order(DeliveryInfo deliveryInfo) {
+    public Order(DeliveryInfo deliveryInfo, List<CartMedia> listCardMedia) {
+
         this.deliveryInfo = deliveryInfo;
+        this.listOrderMedia = new ArrayList<>(listCardMedia);
     }
 
-    public Cart getCart() {
-        return cart;
-    }
     public DeliveryInfo getDeliveryInfo() {
         return this.deliveryInfo;
-    }
-    double calculateShippingFee() {
-        return 30.5;
     }
 
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
     }
 
+    public List<CartMedia> getListOrderMedia() {
+        return listOrderMedia;
+    }
+
+    public void setListOrderMedia(List<CartMedia> listOrderMedia) {
+        this.listOrderMedia = listOrderMedia;
+    }
+
+    public void setShippingFee(double shippingFee) {
+        this.shippingFee = shippingFee;
+    }
+    public double subTotal() {
+        double subTotal = 0.0;
+        for (CartMedia cartMedia: listOrderMedia) {
+            subTotal += cartMedia.getPrice();
+        }
+        return subTotal * 1.1;
+    }
+
+    public double totalAmount() {
+        return subTotal() + this.shippingFee;
+    }
 }

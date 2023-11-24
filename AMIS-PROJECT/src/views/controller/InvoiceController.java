@@ -1,5 +1,6 @@
 package views.controller;
 
+import controllers.PlaceOrderController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,9 +87,7 @@ public class InvoiceController  {
 
         List<CartMedia> lstCartMedia = Cart.getCart().getLstCartMedia();
         int i = 1;
-        double subTotal = 0.0;
         for (CartMedia cartMedia: lstCartMedia) {
-            subTotal += cartMedia.getPrice();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/media_invoice.fxml"));
                 loader.load();
@@ -100,16 +99,20 @@ public class InvoiceController  {
                 e.printStackTrace();
             }
         }
-        double shippingfee = lstCartMedia.size() * 2;
-        subtotal.setText(subTotal+"");
-        shippingFees.setText(shippingfee + "");
-        total.setText((shippingfee + subTotal) + "");
+        PlaceOrderController placeOrderController = new PlaceOrderController();
+        double shippingFee = placeOrderController.calculateShippingFee(order);
+        order.setShippingFee(shippingFee);
+        subtotal.setText(order.subTotal()+"");
+        shippingFees.setText(shippingFee + "");
+        total.setText(order.totalAmount() + "");
     }
 
     @FXML
     void confirmInvoice(ActionEvent event) {
         Stage stage = (Stage) btnConfirmOrder.getScene().getWindow();
-        VNPayController vnPayController = new VNPayController(stage);
+        VNPayController vnPayController;
+        int totalAmount = (int) (order.totalAmount() * 1000);
+        vnPayController = new VNPayController(stage, totalAmount);
     }
 
 }

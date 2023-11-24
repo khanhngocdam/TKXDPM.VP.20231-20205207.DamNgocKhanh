@@ -7,7 +7,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,12 +14,14 @@ import java.util.TimeZone;
 
 public class VNPayController {
     private final Stage stage;
-    public VNPayController(Stage stage) {
+
+    public VNPayController(Stage stage, int totalAmount) {
         this.stage = stage;
         Label location = new Label();
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
-        webEngine.load(buildUrl(10000000+""));
+        System.out.println(totalAmount);
+        webEngine.load(buildUrl(totalAmount+""));
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if(Worker.State.SUCCEEDED.equals(newValue)) {
                 location.setText(webEngine.getLocation());
@@ -52,7 +53,7 @@ public class VNPayController {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String vnp_CreateDate = "vnp_CreateDate=" + formatter.format(cld.getTime()) + "&";
-        System.out.println(vnp_CreateDate);
+
         String vnp_CurrCode = "vnp_CurrCode=VND&";
         String vnp_IpAddr = "vnp_IpAddr=222.252.10.226&";
         String vnp_Locale = "vnp_Locale=vn&";
@@ -61,12 +62,10 @@ public class VNPayController {
         String vnp_ReturnUrl = "vnp_ReturnUrl=https%3A%2F%2Fsandbox.vnpayment.vn%2Ftryitnow%2FHome%2FVnPayReturn&";
         String vnp_TmnCode = "vnp_TmnCode=ORRJM9BG&";
         String vnp_TxnRef = "vnp_TxnRef=" + Config.getRandomNumber(8) + "&";
-        System.out.println(vnp_TxnRef);
         String vnp_Version = "vnp_Version=2.1.0";
 
         String hashData = vnp_Amount + vnp_BankCode + vnp_Command  + vnp_CreateDate + vnp_CurrCode + vnp_IpAddr + vnp_Locale + vnp_OrderInfo + vnp_OrderType + vnp_ReturnUrl + vnp_TmnCode + vnp_TxnRef + vnp_Version;
         url += hashData;
-
         String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData);
         url += "&vnp_SecureHash=" + vnp_SecureHash;
         System.out.println(url);
