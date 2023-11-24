@@ -38,7 +38,7 @@ public class Cart {
             CartMedia cartMedia = (CartMedia) object;
             int requiredQuantity = cartMedia.getQuantity();
             int availQuantity = cartMedia.getMedia().getQuantity();
-            if (requiredQuantity > availQuantity) allAvai = false;
+            if (requiredQuantity > (availQuantity + requiredQuantity)) allAvai = false;
         }
         if (!allAvai) throw new MediaNotAvailableException("Some media not available");
     }
