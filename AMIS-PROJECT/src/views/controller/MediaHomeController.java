@@ -41,9 +41,16 @@ public class MediaHomeController {
         mediaTitle.setText(media.getTitle());
         mediaPrice.setText(String.valueOf(media.getPrice()));
         mediaAvail.setText(media.getQuantity() + "");
-        spinnerChangeNumber.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, media.getQuantity(), 1)
-        );
+        if (media.getQuantity() == 0) {
+            spinnerChangeNumber.setVisible(false);
+            addToCartBtn.setVisible(false);
+            soldOut.setVisible(true);
+        } else {
+            spinnerChangeNumber.setValueFactory(
+                    new SpinnerValueFactory.IntegerSpinnerValueFactory(1, media.getQuantity(), 1)
+            );
+        }
+
     }
 
     public Media getMedia(){

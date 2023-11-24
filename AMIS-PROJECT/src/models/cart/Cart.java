@@ -47,7 +47,7 @@ public class Cart {
         Iterator<CartMedia> iterator = lstCartMedia.iterator();
         while (iterator.hasNext()) {
             CartMedia existingMedia = iterator.next();
-            if (existingMedia.getMedia().equals(cartMedia.getMedia())) {
+            if (existingMedia.getMedia().getId() == cartMedia.getMedia().getId()) {
                 // Nếu phần tử đã tồn tại, thực hiện cập nhật
                 existingMedia.setQuantity(existingMedia.getQuantity() + cartMedia.getQuantity());
                 return;
