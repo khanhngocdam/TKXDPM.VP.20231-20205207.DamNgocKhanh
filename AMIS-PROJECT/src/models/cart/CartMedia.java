@@ -37,4 +37,7 @@ public class CartMedia {
         return this.price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

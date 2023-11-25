@@ -76,6 +76,7 @@ public class DeliveryInfoController {
         }
         DeliveryInfo deliveryInfo = new DeliveryInfo(name.getText(), phone.getText(), province.getValue(), address.getText(), instructions.getText());
         Order order = new Order(deliveryInfo, Cart.getCart().getLstCartMedia());
+        order.setShippingFee(placeOrderController.calculateShippingFee(order));
         InvoiceController invoiceController = new InvoiceController((Stage)btnConfirmDelivery.getScene().getWindow(), order);
         invoiceController.show();
     }

@@ -1,10 +1,12 @@
 package controllers;
 
 import models.DeliveryInfo;
+import models.Invoice;
 import models.Order;
 import models.cart.Cart;
 import models.cart.CartMedia;
 import models.media.Media;
+import utils.ConnectDB;
 
 import java.sql.SQLException;
 
@@ -63,8 +65,13 @@ public class PlaceOrderController {
         return order;
     }
     public double calculateShippingFee(Order order) {
-        return order.subTotal() * 0.1;
+        int shippingFee = 0;
+        for (CartMedia cartMedia: order.getListOrderMedia()) {
+            shippingFee += cartMedia.getQuantity();
+        }
+        return shippingFee * 5;
     }
+    public void saveInvoice(Invoice invoice) {
 
-
+    }
 }

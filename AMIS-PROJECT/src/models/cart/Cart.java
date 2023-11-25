@@ -50,6 +50,7 @@ public class Cart {
             if (existingMedia.getMedia().getId() == cartMedia.getMedia().getId()) {
                 // Nếu phần tử đã tồn tại, thực hiện cập nhật
                 existingMedia.setQuantity(existingMedia.getQuantity() + cartMedia.getQuantity());
+                existingMedia.setPrice(existingMedia.getPrice() + cartMedia.getPrice());
                 return;
             }
         }

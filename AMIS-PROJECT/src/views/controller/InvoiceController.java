@@ -12,12 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.DeliveryInfo;
+import models.Invoice;
 import models.Order;
 import models.cart.Cart;
 import models.cart.CartMedia;
+import utils.ConnectDB;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -99,20 +102,21 @@ public class InvoiceController  {
                 e.printStackTrace();
             }
         }
-        PlaceOrderController placeOrderController = new PlaceOrderController();
-        double shippingFee = placeOrderController.calculateShippingFee(order);
-        order.setShippingFee(shippingFee);
+        order.setShippingFee(order.getShippingFee());
         subtotal.setText(order.subTotal()+"");
-        shippingFees.setText(shippingFee + "");
+        shippingFees.setText(order.getShippingFee() + "");
         total.setText(order.totalAmount() + "");
     }
 
     @FXML
-    void confirmInvoice(ActionEvent event) {
+    void confirmInvoice(ActionEvent event) throws SQLException, ClassNotFoundException {
         Stage stage = (Stage) btnConfirmOrder.getScene().getWindow();
         VNPayController vnPayController;
         int totalAmount = (int) (order.totalAmount() * 1000);
-        vnPayController = new VNPayController(stage, totalAmount);
+        ConnectDB connectDB = new ConnectDB();
+        Cart.getCart().getLstCartMedia().clear();
+        connectDB.updateMediaHome(order, true);
+        vnPayController = new VNPayController(stage, totalAmount, order);
     }
 
 }

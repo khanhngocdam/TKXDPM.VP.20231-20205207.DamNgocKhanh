@@ -7,23 +7,35 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import models.Invoice;
+import models.Order;
+import models.payment.PaymentTransaction;
+import utils.ConnectDB;
+
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 public class VNPayController {
     private final Stage stage;
-
-    public VNPayController(Stage stage, int totalAmount) {
+    private int successfulLoadCount = 0;
+    public VNPayController(Stage stage, int totalAmount, Order order) {
         this.stage = stage;
         Label location = new Label();
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
         System.out.println(totalAmount);
         webEngine.load(buildUrl(totalAmount+""));
+
+
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if(Worker.State.SUCCEEDED.equals(newValue)) {
+                successfulLoadCount++;
+                System.out.println(successfulLoadCount);
                 location.setText(webEngine.getLocation());
             }
         });
@@ -32,7 +44,19 @@ public class VNPayController {
                 try {
                     ResultController resultController = new ResultController(stage);
                     resultController.show();
+                    // Lấy thời gian hiện tại
+                    LocalDateTime currentTime = LocalDateTime.now();
+
+                    // Định dạng thời gian thành chuỗi
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    String formattedTime = currentTime.format(formatter);
+                    PaymentTransaction paymentTransaction = new PaymentTransaction("Successfull - Total amount : " +  totalAmount,formattedTime);
+                    Invoice invoice = new Invoice(order, paymentTransaction, totalAmount);
+                    ConnectDB connectDB = new ConnectDB();
+                    connectDB.saveInvoice(invoice);
                 } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             }

@@ -1,21 +1,26 @@
 package models.payment;
 
 public class PaymentTransaction {
-    private CreditCard card;
     private String transactionContent;
-    private String getTransactionId;
     private String createAt;
-    private String errorCode;
+    private int orderId;
 
-    public PaymentTransaction(CreditCard card, String transactionContent, String getTransactionId, String createAt, String errorCode) {
-        this.card = card;
+    public PaymentTransaction(String transactionContent, String createAt, int orderId) {
+        this.orderId = orderId;
         this.transactionContent = transactionContent;
-        this.getTransactionId = getTransactionId;
         this.createAt = createAt;
-        this.errorCode = errorCode;
     }
 
-    public String getErrorCode() {
-        return errorCode;
+    public PaymentTransaction(String transactionContent, String createAt) {
+        this.transactionContent = transactionContent;
+        this.createAt = createAt;
+    }
+
+    public String getTransactionContent() {
+        return transactionContent;
+    }
+
+    public String getCreateAt() {
+        return createAt;
     }
 }

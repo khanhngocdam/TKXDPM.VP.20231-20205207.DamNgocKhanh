@@ -51,4 +51,5 @@ public class Order {
     public double totalAmount() {
         return subTotal() + this.shippingFee;
     }
+
 }
