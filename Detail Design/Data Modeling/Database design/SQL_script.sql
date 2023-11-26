@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-11-04 17:33:54.173
+-- Last modification date: 2023-11-26 15:53:46.099
 
 -- tables
 -- Table: Book
@@ -26,6 +26,16 @@ which type is CD',
     category_cd varchar(50)  NOT NULL COMMENT 'Category of CD',
     release_date datetime  NULL,
     CONSTRAINT CD_pk PRIMARY KEY (id)
+);
+
+-- Table: CreditCard
+CREATE TABLE CreditCard (
+    id int  NOT NULL AUTO_INCREMENT COMMENT 'ID, auto increment',
+    code varchar(50)  NOT NULL COMMENT 'Cardholders',
+    expiration_date datetime  NOT NULL COMMENT 'Phone number used for registration',
+    number varchar(30)  NOT NULL,
+    name varchar(30)  NOT NULL,
+    CONSTRAINT CreditCard_pk PRIMARY KEY (id)
 );
 
 -- Table: DVD
@@ -94,7 +104,6 @@ CREATE TABLE PaymentTransaction (
     id int  NOT NULL AUTO_INCREMENT,
     createdAt varchar(100)  NOT NULL,
     content varchar(200)  NOT NULL,
-    method varchar(100)  NOT NULL,
     Card_id int  NOT NULL,
     Invoice_id int  NOT NULL,
     CONSTRAINT PaymentTransaction_pk PRIMARY KEY (id)
@@ -106,14 +115,6 @@ CREATE TABLE Track (
     name varchar(100)  NOT NULL,
     CD_id int  NOT NULL,
     CONSTRAINT Track_pk PRIMARY KEY (id)
-);
-
--- Table: VNPay
-CREATE TABLE VNPay (
-    id int  NOT NULL AUTO_INCREMENT COMMENT 'ID, auto increment',
-    owner varchar(50)  NOT NULL COMMENT 'Cardholders',
-    phone_number_of_vnpay int  NOT NULL COMMENT 'Phone number used for registration',
-    CONSTRAINT VNPay_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
@@ -147,7 +148,7 @@ ALTER TABLE MediaOrder ADD CONSTRAINT MediaOrder_Order FOREIGN KEY MediaOrder_Or
 
 -- Reference: PaymentTransaction_Card (table: PaymentTransaction)
 ALTER TABLE PaymentTransaction ADD CONSTRAINT PaymentTransaction_Card FOREIGN KEY PaymentTransaction_Card (Card_id)
-    REFERENCES VNPay (id);
+    REFERENCES CreditCard (id);
 
 -- Reference: PaymentTransaction_Invoice (table: PaymentTransaction)
 ALTER TABLE PaymentTransaction ADD CONSTRAINT PaymentTransaction_Invoice FOREIGN KEY PaymentTransaction_Invoice (Invoice_id)
