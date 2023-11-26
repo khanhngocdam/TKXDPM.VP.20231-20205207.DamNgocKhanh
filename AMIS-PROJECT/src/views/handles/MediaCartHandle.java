@@ -1,20 +1,15 @@
-package views.controller;
+package views.handles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import models.cart.Cart;
 import models.cart.CartMedia;
 import models.media.Media;
 
-import java.util.List;
-
-public class MediaCartController {
+public class MediaCartHandle {
 
     @FXML
     private ImageView image;
@@ -36,14 +31,14 @@ public class MediaCartController {
 
     private CartMedia cardMedia;
 
-    private CartController cartController;
+    private CartHandle cartHandle;
 
-    public CartController getCartController() {
-        return cartController;
+    public CartHandle getCartController() {
+        return cartHandle;
     }
 
-    public void setCartController(CartController cartController) {
-        this.cartController = cartController;
+    public void setCartController(CartHandle cartHandle) {
+        this.cartHandle = cartHandle;
     }
 
     public CartMedia getCardMedia() {
@@ -67,7 +62,7 @@ public class MediaCartController {
 
     public void deleteMediaInCart(ActionEvent event) {
         Cart.getCart().removeCartMedia(cardMedia);
-        cartController.initialize();
+        cartHandle.initialize();
     }
 }
 

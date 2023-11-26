@@ -1,12 +1,9 @@
-package views.controller;
+package views.handles;
 
 import controllers.PlaceOrderController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -14,13 +11,11 @@ import models.cart.Cart;
 import models.cart.CartMedia;
 
 import java.io.IOException;
-import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.List;
-import java.util.ResourceBundle;
+
 import javafx.scene.control.Label;
 
-public class CartController {
+public class CartHandle {
     @FXML
     private AnchorPane mainAnchorPane;
     @FXML
@@ -33,7 +28,7 @@ public class CartController {
     @FXML
     private VBox vboxCart;
 
-    private HomeController homeController;
+    private HomeHandle homeHandle;
     private PlaceOrderController placeOrderController;
 
     public void requestToPlaceOrder(MouseEvent mouseEvent) {
@@ -46,9 +41,9 @@ public class CartController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/media_cart.fxml"));
                 loader.load();
-                MediaCartController mediaCartController = loader.getController();
-                mediaCartController.setData(cartMedia);
-                mediaCartController.setCartController(this);
+                MediaCartHandle mediaCartHandle = loader.getController();
+                mediaCartHandle.setData(cartMedia);
+                mediaCartHandle.setCartController(this);
                 vboxCart.getChildren().add(loader.getRoot());
             } catch (IOException e) {
                 e.printStackTrace();

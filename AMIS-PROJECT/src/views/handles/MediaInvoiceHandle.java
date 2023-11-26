@@ -1,15 +1,13 @@
-package views.controller;
+package views.handles;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import models.cart.CartMedia;
 import models.media.Media;
 
-public class MediaInvoiceController{
+public class MediaInvoiceHandle {
     @FXML
     private ImageView image;
     @FXML
@@ -19,14 +17,14 @@ public class MediaInvoiceController{
     @FXML
     private Label numOfProd;
     private CartMedia cardMedia;
-     private InvoiceController invoiceController;
+     private InvoiceHandle invoiceHandle;
 
     public void setCardMedia(CartMedia cardMedia) {
         this.cardMedia = cardMedia;
     }
 
-    public void setInvoiceController(InvoiceController invoiceController) {
-        this.invoiceController = invoiceController;
+    public void setInvoiceController(InvoiceHandle invoiceHandle) {
+        this.invoiceHandle = invoiceHandle;
     }
 
     public void setData(CartMedia cartMedia) {

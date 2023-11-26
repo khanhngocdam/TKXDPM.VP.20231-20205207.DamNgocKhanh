@@ -1,4 +1,4 @@
-package views.controller;
+package views.handles;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;

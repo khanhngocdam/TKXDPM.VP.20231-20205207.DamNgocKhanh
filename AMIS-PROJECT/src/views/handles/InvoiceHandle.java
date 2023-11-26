@@ -1,10 +1,9 @@
-package views.controller;
+package views.handles;
 
-import controllers.PlaceOrderController;
+import Subsystem.VNPaySubsystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,19 +11,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.DeliveryInfo;
-import models.Invoice;
 import models.Order;
 import models.cart.Cart;
 import models.cart.CartMedia;
 import utils.ConnectDB;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class InvoiceController  {
+public class InvoiceHandle {
     @FXML
     private AnchorPane mainAnchorPane;
     @FXML
@@ -63,7 +59,7 @@ public class InvoiceController  {
     private Scene scene;
     private Order order;
 
-    public InvoiceController(Stage stage, Order order) throws IOException {
+    public InvoiceHandle(Stage stage, Order order) throws IOException {
         this.stage = stage;
         this.order = order;
 
@@ -94,9 +90,9 @@ public class InvoiceController  {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/media_invoice.fxml"));
                 loader.load();
-                MediaInvoiceController mediaInvoiceController = loader.getController();
-                mediaInvoiceController.setData(cartMedia);
-                mediaInvoiceController.setInvoiceController(this);
+                MediaInvoiceHandle mediaInvoiceHandle = loader.getController();
+                mediaInvoiceHandle.setData(cartMedia);
+                mediaInvoiceHandle.setInvoiceController(this);
                 vboxItems.getChildren().add(loader.getRoot());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -111,12 +107,12 @@ public class InvoiceController  {
     @FXML
     void confirmInvoice(ActionEvent event) throws SQLException, ClassNotFoundException {
         Stage stage = (Stage) btnConfirmOrder.getScene().getWindow();
-        VNPayController vnPayController;
+        VNPaySubsystem vnPaySubsystem;
         int totalAmount = (int) (order.totalAmount() * 1000);
         ConnectDB connectDB = new ConnectDB();
         Cart.getCart().getLstCartMedia().clear();
         connectDB.updateMediaHome(order, true);
-        vnPayController = new VNPayController(stage, totalAmount, order);
+        vnPaySubsystem = new VNPaySubsystem(stage, totalAmount, order);
     }
 
 }

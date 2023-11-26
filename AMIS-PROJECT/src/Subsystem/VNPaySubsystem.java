@@ -1,4 +1,4 @@
-package views.controller;
+package Subsystem;
 
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
@@ -11,6 +11,8 @@ import models.Invoice;
 import models.Order;
 import models.payment.PaymentTransaction;
 import utils.ConnectDB;
+import views.handles.Config;
+import views.handles.ResultHandle;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,10 +22,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class VNPayController {
+public class VNPaySubsystem {
     private final Stage stage;
     private int successfulLoadCount = 0;
-    public VNPayController(Stage stage, int totalAmount, Order order) {
+    public VNPaySubsystem(Stage stage, int totalAmount, Order order) {
         this.stage = stage;
         Label location = new Label();
         WebView browser = new WebView();
@@ -42,8 +44,8 @@ public class VNPayController {
         location.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.contains("vnp_ResponseCode=00")) {
                 try {
-                    ResultController resultController = new ResultController(stage);
-                    resultController.show();
+                    ResultHandle resultHandle = new ResultHandle(stage);
+                    resultHandle.show();
                     // Lấy thời gian hiện tại
                     LocalDateTime currentTime = LocalDateTime.now();
 
@@ -85,14 +87,14 @@ public class VNPayController {
         String vnp_OrderType = "vnp_OrderType=other&";
         String vnp_ReturnUrl = "vnp_ReturnUrl=https%3A%2F%2Fsandbox.vnpayment.vn%2Ftryitnow%2FHome%2FVnPayReturn&";
         String vnp_TmnCode = "vnp_TmnCode=ORRJM9BG&";
-        String vnp_TxnRef = "vnp_TxnRef=" + Config.getRandomNumber(8) + "&";
+        String vnp_TxnRef = "vnp_TxnRef=" + views.handles.Config.getRandomNumber(8) + "&";
         String vnp_Version = "vnp_Version=2.1.0";
 
         String hashData = vnp_Amount + vnp_BankCode + vnp_Command  + vnp_CreateDate + vnp_CurrCode + vnp_IpAddr + vnp_Locale + vnp_OrderInfo + vnp_OrderType + vnp_ReturnUrl + vnp_TmnCode + vnp_TxnRef + vnp_Version;
         url += hashData;
-        String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData);
+        String vnp_SecureHash = views.handles.Config.hmacSHA512(Config.secretKey, hashData);
         url += "&vnp_SecureHash=" + vnp_SecureHash;
-        System.out.println(url);
+
         return url;
     }
 }

@@ -1,22 +1,15 @@
-package views.controller;
-import javafx.event.ActionEvent;
+package views.handles;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import models.cart.Cart;
 import models.cart.CartMedia;
-import models.media.Book;
 import models.media.Media;
 import utils.ConnectDB;
 
@@ -24,9 +17,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class HomeController {
+public class HomeHandle {
     @FXML
     private AnchorPane mainAnchorPane;
 
@@ -72,9 +64,9 @@ public class HomeController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/media_home.fxml"));
                 loader.load();
-                MediaHomeController mediaHomeController = loader.getController();
-                mediaHomeController.setData(lstMedia.get(i));
-                mediaHomeController.setHomeController(this);
+                MediaHomeHandle mediaHomeHandle = loader.getController();
+                mediaHomeHandle.setData(lstMedia.get(i));
+                mediaHomeHandle.setHomeController(this);
                 vboxColumn.getChildren().add(loader.getRoot());
             } catch (IOException e) {
                 e.printStackTrace();

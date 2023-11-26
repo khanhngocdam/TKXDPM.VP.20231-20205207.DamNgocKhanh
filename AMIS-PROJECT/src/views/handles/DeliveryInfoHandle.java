@@ -1,15 +1,12 @@
-package views.controller;
+package views.handles;
 
 import controllers.PlaceOrderController;
 import exception.InvalidDeliveryInfoException;
-import exception.MediaNotAvailableException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +17,7 @@ import models.cart.Cart;
 
 import java.io.IOException;
 
-public class DeliveryInfoController {
+public class DeliveryInfoHandle {
 
     @FXML
     private AnchorPane mainAnchorPane;
@@ -77,8 +74,8 @@ public class DeliveryInfoController {
         DeliveryInfo deliveryInfo = new DeliveryInfo(name.getText(), phone.getText(), province.getValue(), address.getText(), instructions.getText());
         Order order = new Order(deliveryInfo, Cart.getCart().getLstCartMedia());
         order.setShippingFee(placeOrderController.calculateShippingFee(order));
-        InvoiceController invoiceController = new InvoiceController((Stage)btnConfirmDelivery.getScene().getWindow(), order);
-        invoiceController.show();
+        InvoiceHandle invoiceHandle = new InvoiceHandle((Stage)btnConfirmDelivery.getScene().getWindow(), order);
+        invoiceHandle.show();
     }
 
 }

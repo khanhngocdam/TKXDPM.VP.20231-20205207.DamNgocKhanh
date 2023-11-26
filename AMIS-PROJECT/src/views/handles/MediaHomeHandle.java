@@ -1,8 +1,7 @@
-package views.controller;
+package views.handles;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,9 +9,7 @@ import models.cart.Cart;
 import models.cart.CartMedia;
 import models.media.Media;
 
-import java.util.List;
-
-public class MediaHomeController {
+public class MediaHomeHandle {
     @FXML
     private ImageView mediaImage;
 
@@ -33,7 +30,7 @@ public class MediaHomeController {
 
     private Media media;
 
-    private HomeController homeController;
+    private HomeHandle homeHandle;
     public void setData(Media media) {
         setMedia(media);
         // Thiết lập dữ liệu từ MediaItem vào các thành phần trong media_home.fxml
@@ -66,8 +63,8 @@ public class MediaHomeController {
     }
 
     // Setter để đặt giá trị cho biến tham chiếu đến HomeController
-    public void setHomeController(HomeController homeController) {
-        this.homeController = homeController;
+    public void setHomeController(HomeHandle homeHandle) {
+        this.homeHandle = homeHandle;
     }
 
     @FXML
@@ -88,8 +85,8 @@ public class MediaHomeController {
 
 
         // Gọi phương thức updateNumMediaInCart() từ HomeController
-        if (homeController != null) {
-            homeController.updateNumMediaInCart();
+        if (homeHandle != null) {
+            homeHandle.updateNumMediaInCart();
         }
     }
 }

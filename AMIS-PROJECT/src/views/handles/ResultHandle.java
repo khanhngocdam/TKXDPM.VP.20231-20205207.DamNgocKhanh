@@ -1,6 +1,5 @@
-package views.controller;
+package views.handles;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,14 +9,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ResultController {
+public class ResultHandle {
     private Stage stage;
     private Scene scene;
     @FXML
     private Button okButton;
     @FXML
     private AnchorPane mainAnchorPane;
-    public ResultController(Stage stage) throws IOException {
+    public ResultHandle(Stage stage) throws IOException {
         this.stage = stage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/result.fxml"));
         loader.setController(this);
