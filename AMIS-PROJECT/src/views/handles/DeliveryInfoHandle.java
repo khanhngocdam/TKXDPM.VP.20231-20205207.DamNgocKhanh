@@ -5,6 +5,7 @@ import exception.InvalidDeliveryInfoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -78,5 +79,17 @@ public class DeliveryInfoHandle {
         invoiceHandle.show();
     }
 
+    @FXML
+    public void returnPrevPage(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
+            AnchorPane cartPane = loader.load();
+
+            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình cart
+            mainAnchorPane.getChildren().setAll(cartPane);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

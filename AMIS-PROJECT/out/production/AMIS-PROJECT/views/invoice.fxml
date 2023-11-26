@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#returnPrevPage" prefHeight="823.0" prefWidth="1374.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="pageTitle" layoutX="60.0" layoutY="-9.0" prefHeight="96.0" prefWidth="199.0" text="INVOICE" textAlignment="CENTER" textFill="#5091e6">
          <font>
@@ -32,7 +32,7 @@
          </image>
       </ImageView>
       <AnchorPane layoutX="601.0" layoutY="663.0" />
-      <GridPane layoutX="473.0" layoutY="549.0" prefHeight="114.0" prefWidth="479.0">
+      <GridPane layoutX="473.0" layoutY="600.0" prefHeight="122.0" prefWidth="486.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.2" minWidth="0.0" prefWidth="189.600048828125" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="843.2" minWidth="0.0" prefWidth="201.6" />
@@ -85,7 +85,7 @@
             </Label>
          </children>
       </GridPane>
-      <GridPane layoutX="22.0" layoutY="68.0" prefHeight="448.0" prefWidth="623.0">
+      <GridPane layoutX="19.0" layoutY="152.0" prefHeight="439.0" prefWidth="632.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.2" minWidth="0.0" prefWidth="187.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="843.2" minWidth="0.0" prefWidth="436.0" />
@@ -165,15 +165,20 @@
             </Label>
          </children>
       </GridPane>
-      <ScrollPane fx:id="vboxIte" hbarPolicy="NEVER" layoutX="670.0" layoutY="77.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="669.0">
+      <ScrollPane fx:id="vboxIte" hbarPolicy="NEVER" layoutX="675.0" layoutY="137.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="664.0">
          <content>
             <VBox fx:id="vboxItems" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="567.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="btnConfirmOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="540.0" layoutY="690.0" mnemonicParsing="false" onAction="#confirmInvoice" onMouseClicked="#confirmInvoice" prefHeight="46.0" prefWidth="316.0" style="-fx-background-color: #5091e6; -fx-cursor: hand;" text="Confirm order" textFill="WHITE">
+      <Button fx:id="btnConfirmOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="540.0" layoutY="738.0" mnemonicParsing="false" onAction="#confirmInvoice" onMouseClicked="#confirmInvoice" prefHeight="46.0" prefWidth="316.0" style="-fx-background-color: #5091e6; -fx-cursor: hand;" text="Confirm order" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="24.0" />
          </font>
       </Button>
+      <ImageView fitHeight="38.0" fitWidth="78.0" layoutX="14.0" layoutY="87.0" onMouseClicked="#returnPrevPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/assets/images/return.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

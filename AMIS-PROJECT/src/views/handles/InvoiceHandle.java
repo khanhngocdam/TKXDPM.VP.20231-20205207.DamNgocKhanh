@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -113,6 +114,18 @@ public class InvoiceHandle {
         Cart.getCart().getLstCartMedia().clear();
         connectDB.updateMediaHome(order, true);
         vnPaySubsystem = new VNPaySubsystem(stage, totalAmount, order);
+    }
+
+    @FXML
+    void returnPrevPage(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/delivery_info.fxml"));
+            AnchorPane homePane = loader.load();
+            // Thay thế nội dung của mainAnchorPane bằng nội dung của màn hình Home
+            mainAnchorPane.getChildren().setAll(homePane);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
