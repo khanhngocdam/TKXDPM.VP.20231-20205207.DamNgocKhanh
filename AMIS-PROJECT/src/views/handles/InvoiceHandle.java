@@ -109,7 +109,7 @@ public class InvoiceHandle {
     void confirmInvoice(ActionEvent event) throws SQLException, ClassNotFoundException {
         Stage stage = (Stage) btnConfirmOrder.getScene().getWindow();
         VNPaySubsystem vnPaySubsystem;
-        int totalAmount = (int) (order.totalAmount() * 1000);
+        int totalAmount = (int) (order.totalAmount());
         ConnectDB connectDB = new ConnectDB();
         Cart.getCart().getLstCartMedia().clear();
         connectDB.updateMediaHome(order, true);

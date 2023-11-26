@@ -26,7 +26,7 @@ public class ConnectDB {
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("select * from media");
             while (rs.next()) {
-                listMedia.add(new Media(rs.getInt("id"), rs.getString("title"), rs.getDouble("price"),
+                listMedia.add(new Media(rs.getInt("id"), rs.getString("title"), (int) rs.getDouble("price") * 1000,
                         rs.getInt("quantity"), rs.getString("imageURL")));
             }
 
