@@ -59,3 +59,40 @@ javafx.graphics/com.sun.scenario.effect=ALL-UNNAMED
 javafx.graphics/com.sun.scenario.effect.impl.prism=ALL-UNNAMED
 --add-opens
 javafx.graphics/com.sun.prism.image=ALL-UNNAMED
+
+Tài khoản ngân hàng để test : 
+Ngân hàng: NCB
+Số thẻ: 9704198526191432198
+Tên chủ thẻ:NGUYEN VAN A
+Ngày phát hành:07/15
+Mật khẩu OTP:123456
+
+-> Thành Công
+
+Ngân hàng: NCB
+Số thẻ: 9704195798459170488
+Tên chủ thẻ:NGUYEN VAN A
+Ngày phát hành:07/15
+
+-> Thẻ không đủ số dư
+
+Ngân hàng: NCB
+Số thẻ: 9704192181368742
+Tên chủ thẻ:NGUYEN VAN A
+Ngày phát hành:07/15
+
+-> Thẻ chưa kích hoạt
+
+Ngân hàng: NCB
+Số thẻ: 9704193370791314
+Tên chủ thẻ:NGUYEN VAN A
+Ngày phát hành:07/15
+
+-> Thẻ bị khóa
+
+Ngân hàng: NCB
+Số thẻ: 9704194841945513
+Tên chủ thẻ:NGUYEN VAN A
+Ngày phát hành:07/15
+
+-> Thẻ hết hạn  
